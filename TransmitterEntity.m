@@ -1,4 +1,4 @@
-function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TranmitterEntity(carrier, pdsch, encodeDLSCH, harqEntity, nSlot, newPrecodingWeight, codeRate, fileID, nTxAnts, decodeDLSCH)
+function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TransmitterEntity(carrier, pdsch, encodeDLSCH, harqEntity, nSlot, newPrecodingWeight, codeRate, fileID, nTxAnts, decodeDLSCH)
 
     % Generate PDSCH indices info, which is needed to calculate the transport
     % block size
