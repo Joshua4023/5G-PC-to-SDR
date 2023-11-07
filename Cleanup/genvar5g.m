@@ -1,4 +1,4 @@
-function genvar5g
+function [carrier, pdsch, NHARQProcesses, rvSeq, codeRate, encodeDLSCH, decodeDLSCH] = genvar5g
 
 %% Carrier config
 carrier = nrCarrierConfig
@@ -103,7 +103,7 @@ function noise = generateAWGN(SNRdB,nRxAnts,Nfft,sizeRxWaveform)
     % default. The SNR is defined per RE for each receive antenna (TS
     % 38.101-4).
     SNR = 10^(SNRdB/10); % Calculate linear noise gain
-    N0 = 1/sqrt(0.0*nRxAnts*double(Nfft)*SNR);
+    N0 = 1/sqrt(2.0*nRxAnts*double(Nfft)*SNR);
     noise = N0*complex(randn(sizeRxWaveform),randn(sizeRxWaveform));
 end
     
