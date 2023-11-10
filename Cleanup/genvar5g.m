@@ -2,7 +2,7 @@ function [carrier, pdsch, NHARQProcesses, rvSeq, codeRate, encodeDLSCH, decodeDL
 
 %% Carrier config
 carrier = nrCarrierConfig
-carrier.NCellID = 1;
+carrier.NCellID = 1;                % Physical layer cell identity specified as an interger ranging from 0 to 1007
 carrier.SubcarrierSpacing = 15;
 carrier.CyclicPrefix = 'normal';
 carrier.NSizeGrid;
@@ -70,14 +70,14 @@ codeRate
 
 %% Create DL-SCH encoder object
 encodeDLSCH = nrDLSCH;
-encodeDLSCH.MultipleHARQProcesses = true;
+encodeDLSCH.MultipleHARQProcesses = false;
 encodeDLSCH.TargetCodeRate = codeRate;
 
 encodeDLSCH
 
 %% Create DLSCH decoder object
 decodeDLSCH = nrDLSCHDecoder;
-decodeDLSCH.MultipleHARQProcesses = true;
+decodeDLSCH.MultipleHARQProcesses = false;
 decodeDLSCH.TargetCodeRate = codeRate;
 decodeDLSCH.LDPCDecodingAlgorithm = "Normalized min-sum";
 decodeDLSCH.MaximumLDPCIterationCount = 6;

@@ -64,7 +64,7 @@ function [decbits, statusReport, pdschEq] = RecieverEntity(carrier, pdsch, decod
     decodeDLSCH.TransportBlockLength = trBlkSizes;
 
     [decbits,blkerr] = decodeDLSCH(dlschLLRs,pdsch.Modulation,pdsch.NumLayers, ...
-    harqEntity.RedundancyVersion,harqEntity.HARQProcessID);
+    harqEntity.RedundancyVersion);%%,harqEntity.HARQProcessID);
     %decbits;
 
     fwrite(fileID2,decbits, 'logical');

@@ -1,4 +1,4 @@
-function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TransmitterEntity(carrier, pdsch, encodeDLSCH, harqEntity, nSlot, newPrecodingWeight, codeRate, fileID, nTxAnts, decodeDLSCH)
+function [txWaveform, waveformInfo, trBlk, trBlkSizes, codedTrBlock, pdschSymbols, pdschInfo] = TransmitterEntity(carrier, pdsch, encodeDLSCH, harqEntity, nSlot, newPrecodingWeight, codeRate, fileID, nTxAnts, decodeDLSCH)
 
     % Generate PDSCH indices info, which is needed to calculate the transport
     % block size
@@ -21,6 +21,9 @@ function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TransmitterEntity(carri
             elseif nSlot == 1
             trBlk = randi([0 0],trBlkSizes(cwIdx),1);
                 setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
+            elseif nSlot == 2 
+                trBlk = randi([1 1],trBlkSizes(cwIdx),1);
+                setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
             else 
                 trBlk = randi([1 1],trBlkSizes(cwIdx),1);
                 setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
@@ -33,7 +36,7 @@ function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TransmitterEntity(carri
         end
    end
 
-    codedTrBlock = encodeDLSCH(pdsch.Modulation,pdsch.NumLayers,pdschInfo.G,harqEntity.RedundancyVersion,harqEntity.HARQProcessID);
+    codedTrBlock = encodeDLSCH(pdsch.Modulation,pdsch.NumLayers,pdschInfo.G,harqEntity.RedundancyVersion); %,harqEntity.HARQProcessID);
 
     pdschSymbols = nrPDSCH(carrier,pdsch,codedTrBlock);
 
