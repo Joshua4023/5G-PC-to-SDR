@@ -1,4 +1,4 @@
-function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TransmitterEntity(carrier, pdsch, encodeDLSCH, harqEntity, nSlot, newPrecodingWeight, codeRate, fileID, nTxAnts, decodeDLSCH)
+function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TransmitterEntity(carrier, pdsch, encodeDLSCH, harqEntity, newPrecodingWeight, codeRate, data, nTxAnts, decodeDLSCH)
 
     % Generate PDSCH indices info, which is needed to calculate the transport
     % block size
@@ -12,21 +12,8 @@ function [txWaveform, waveformInfo, trBlk, trBlkSizes] = TransmitterEntity(carri
     for cwIdx = 1:pdsch.NumCodewords
         if harqEntity.NewData(cwIdx)
             % Create and store a new transport block for transmission
-            if nSlot == 0
-               
-                trBlk = fread(fileID,trBlkSizes(cwIdx),'logical');
-                setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
-                %trBlk = randi([1 1],trBlkSizes(cwIdx),1);
-                %setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
-            elseif nSlot == 1
-            trBlk = randi([0 0],trBlkSizes(cwIdx),1);
-                setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
-            else 
-                trBlk = randi([1 1],trBlkSizes(cwIdx),1);
-                setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
-            end
-            % If the previous RV sequence ends without successful
-            % decoding, flush the soft buffer
+            trBlk = randi([1 1],trBlkSizes(cwIdx),1);
+            setTransportBlock(encodeDLSCH,trBlk,cwIdx-1,harqEntity.HARQProcessID);
             if harqEntity.SequenceTimeout(cwIdx)
                 resetSoftBuffer(decodeDLSCH,cwIdx-1,harqEntity.HARQProcessID);
             end

@@ -1,4 +1,4 @@
-function [decbits, statusReport, pdschEq] = RecieverEntity(carrier, pdsch, decodeDLSCH, harqEntity, rxWaveform, offset, fileID2, newPrecodingWeight, trBlkSizes)
+function [decbits, statusReport, pdschEq] = RecieverEntity(carrier, pdsch, decodeDLSCH, harqEntity, rxWaveform, offset, newPrecodingWeight, trBlkSizes)
 
     precodingWeights = newPrecodingWeight;
 
@@ -64,10 +64,9 @@ function [decbits, statusReport, pdschEq] = RecieverEntity(carrier, pdsch, decod
     decodeDLSCH.TransportBlockLength = trBlkSizes;
 
     [decbits,blkerr] = decodeDLSCH(dlschLLRs,pdsch.Modulation,pdsch.NumLayers, ...
-    harqEntity.RedundancyVersion);%%,harqEntity.HARQProcessID);
-    %decbits;
+    harqEntity.RedundancyVersion);
+    decbits;
 
-    fwrite(fileID2,decbits, 'logical');
 
     
 
