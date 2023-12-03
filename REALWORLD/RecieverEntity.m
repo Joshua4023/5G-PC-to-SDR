@@ -33,12 +33,6 @@ function [decbits, statusReport, pdschEq] = RecieverEntity(carrier, pdsch, decod
     newPrecodingWeight = getPrecodingMatrix(pdsch.PRBSet,pdsch.NumLayers,estChGridAnts);
     
 
-    mesh(abs(estChGridLayers(:,:,1,1)));
-    title('Channel Estimate');
-    xlabel('OFDM Symbol');
-    ylabel("Subcarrier");
-    zlabel("Magnitude");
-    
     %% Equalization
 
     [pdschRx,pdschHest] = nrExtractResources(pdschIndices,rxGrid,estChGridLayers);
