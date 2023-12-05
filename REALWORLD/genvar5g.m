@@ -1,7 +1,7 @@
 function [carrier, pdsch, NHARQProcesses, rvSeq, codeRate, encodeDLSCH, decodeDLSCH] = genvar5g
 
 %% Carrier config
-carrier = nrCarrierConfig
+carrier = nrCarrierConfig;
 carrier.NCellID = 1;
 carrier.SubcarrierSpacing = 15;
 carrier.CyclicPrefix = 'normal';
@@ -9,7 +9,7 @@ carrier.NSizeGrid;
 carrier.NSlot;
 carrier.NFrame;
 carrier.IntraCellGuardBands;
-
+carrier
 %Read-Only variables
 %SymbolsPerSlot: Number of OFDM symbols per slot bases on CyclePrefix
 %SlotsPerSubFrame: Number of Slots per 1ms frame, based of the subcarrierspacing
