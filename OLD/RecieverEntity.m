@@ -58,7 +58,7 @@ function [decbits, statusReport, pdschEq] = RecieverEntity(carrier, pdsch, decod
         dlschLLRs{cwIdx} = dlschLLRs{cwIdx} .* csi{cwIdx}(:);   % Scale    
     end
 
-%% DL-SCH Decoding
+    %% DL-SCH Decoding
 
     
     decodeDLSCH.TransportBlockLength = trBlkSizes;
